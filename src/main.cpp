@@ -11,6 +11,8 @@
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
+#include "driverFunctions.h"
+#include "autonFunctions.h"
 
 using namespace vex;
 
