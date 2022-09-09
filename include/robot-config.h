@@ -5,10 +5,12 @@ extern brain Brain;
 extern motor RightMotorA;
 extern motor RightMotorB;
 extern motor RightMotorC;
+extern motor_group RightDrive;
 
 extern motor LeftMotorA;
 extern motor LeftMotorB;
 extern motor LeftMotorC;
+extern motor_group LeftDrive;
 
 extern encoder RightEncoder;
 extern encoder LeftEncoder;
