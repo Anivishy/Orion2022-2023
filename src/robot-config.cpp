@@ -19,6 +19,7 @@ encoder RightEncoder = encoder(Brain.ThreeWirePort.A);
 encoder LeftEncoder = encoder(Brain.ThreeWirePort.B);
 encoder MiddleEncoder = encoder(Brain.ThreeWirePort.C);
 
+inertial gyroS = inertial(PORT12);
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.

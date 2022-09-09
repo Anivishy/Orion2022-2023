@@ -16,6 +16,8 @@ extern encoder RightEncoder;
 extern encoder LeftEncoder;
 extern encoder MiddleEncoder;
 
+extern inertial gyroS;
+
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
  *
