@@ -1,7 +1,18 @@
 using namespace vex;
 
 extern brain Brain;
-extern motor FrontRight;
+
+extern motor RightMotorA;
+extern motor RightMotorB;
+extern motor RightMotorC;
+
+extern motor LeftMotorA;
+extern motor LeftMotorB;
+extern motor LeftMotorC;
+
+extern encoder RightEncoder;
+extern encoder LeftEncoder;
+extern encoder MiddleEncoder;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
