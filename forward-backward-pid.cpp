@@ -13,7 +13,7 @@ void drivePID(double inches, ) {
   int error = 0;
   int prevError = 0;
   int integral = 0;
-  int derivative;
+  int derivative = 0;
 
   int power = 0;
 
