@@ -1,8 +1,8 @@
 #include "vex.h"
 
-double kP = 1;
-double kI = 1;
-double kD = 1;
+double kP = 0.0; //scales the error as a percent
+double kI = 0.0; //this should be a reidiculously small as integral will be very large.
+double kD = 0.0; //should be negative as the derivative calculation comes out to a negative # as well
 
 void turnRight(double deg){
   double error;
