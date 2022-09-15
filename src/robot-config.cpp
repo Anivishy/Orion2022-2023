@@ -4,6 +4,7 @@ using namespace vex;
 
 // A global instance of brain used for printing to the V5 brain screen
 brain Brain;
+controller Controller1 = controller(primary);
 
 motor RightMotorA = motor(PORT1, ratio18_1, false);
 motor RightMotorB = motor(PORT2, ratio18_1, false);
@@ -21,6 +22,9 @@ encoder MiddleEncoder = encoder(Brain.ThreeWirePort.C);
 
 inertial gyroS = inertial(PORT12);
 
+pneumatics indexer = pneumatics(Brain.ThreeWirePort.H);
+pneumatics expandLeft = pneumatics(Brain.ThreeWirePort.G);
+pneumatics expandRight = pneumatics(Brain.ThreeWirePort.F);
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
  *
