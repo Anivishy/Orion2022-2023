@@ -3,25 +3,21 @@ using namespace vex;
 extern brain Brain;
 extern controller Controller1;
 
-extern motor RightMotorA;
-extern motor RightMotorB;
-extern motor RightMotorC;
+extern motor RightMotorFront;
+extern motor RightMotorMiddle;
+extern motor RightMotorBack;
 extern motor_group RightDrive;
 
-extern motor LeftMotorA;
-extern motor LeftMotorB;
-extern motor LeftMotorC;
+extern motor LeftMotorFront;
+extern motor LeftMotorMiddle;
+extern motor LeftMotorBack;
 extern motor_group LeftDrive;
 
-extern pneumatics indexer;
-extern pneumatics expandLeft;
-extern pneumatics expandRight;
+extern pneumatics Indexer;
+extern pneumatics ExpansionPneumatic;
 
-extern encoder RightEncoder;
-extern encoder LeftEncoder;
-extern encoder MiddleEncoder;
-
-extern inertial gyroS;
+//extern inertial gyroS;
+//vision
 
 
 /**

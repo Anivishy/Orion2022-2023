@@ -2,6 +2,7 @@
 #include "math.h"
 
 double TRACKWHEEL_CIRCUM = 2.75;
+double DRIVE_CIRCUM = 2.75;
 
 
 void drivePID(double inches) {
@@ -23,7 +24,7 @@ void drivePID(double inches) {
     error = target - LeftEncoder.position(rotationUnits::deg);
     integral = integral + error;
     
-    if (error <= 0 || error > /*TODO*/ 100) {
+    if (error <= 0 || error > /*TUNE LATER*/ 100) {
       integral = 0;
     }
 
@@ -31,7 +32,8 @@ void drivePID(double inches) {
     prevError = error;
 
     power = (error * kP) + (integral*kI) + (derivative*kD);
-    
+    RightDrive.spin(forward, power, pct);
+    LeftDrive.spin(forward, power, pct);
 
     task::sleep(20);
   }
