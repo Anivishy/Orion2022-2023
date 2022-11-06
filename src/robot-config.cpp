@@ -6,25 +6,30 @@ using namespace vex;
 brain Brain;
 controller Controller1 = controller(primary);
 
-motor RightMotorA = motor(PORT1, ratio18_1, false);
-motor RightMotorB = motor(PORT2, ratio18_1, false);
-motor RightMotorC = motor(PORT3, ratio18_1, false);
-motor_group RightDrive = motor_group(RightMotorA, RightMotorB, RightMotorC);
+motor RightMotorFront = motor(PORT20, ratio18_1, true);
+motor RightMotorMiddle = motor(PORT1, ratio18_1, true);
+motor RightMotorBack = motor(PORT3, ratio18_1, false);
+motor_group RightDrive = motor_group(RightMotorFront, RightMotorMiddle, RightMotorBack);
 
-motor LeftMotorA = motor(PORT4, ratio18_1, false);
-motor LeftMotorB = motor(PORT5, ratio18_1, false);
-motor LeftMotorC = motor(PORT6, ratio18_1, false);
-motor_group LeftDrive = motor_group(LeftMotorA, LeftMotorB, LeftMotorC);
+motor LeftMotorFront = motor(PORT15, ratio18_1, false);
+motor LeftMotorMiddle = motor(PORT4, ratio18_1, false);
+motor LeftMotorBack = motor(PORT13, ratio18_1, true);
+motor_group LeftDrive = motor_group(LeftMotorFront, LeftMotorMiddle, LeftMotorBack);
+
+motor IntakeMotor = motor(PORT7, ratio18_1, false);
+motor FlywheelMotor = motor(PORT8, ratio36_1, true);
 
 encoder RightEncoder = encoder(Brain.ThreeWirePort.A);
 encoder LeftEncoder = encoder(Brain.ThreeWirePort.B);
 encoder MiddleEncoder = encoder(Brain.ThreeWirePort.C);
 
-inertial gyroS = inertial(PORT12);
+//inertial gyroS = inertial(PORT12);
 
-pneumatics indexer = pneumatics(Brain.ThreeWirePort.H);
-pneumatics expandLeft = pneumatics(Brain.ThreeWirePort.G);
-pneumatics expandRight = pneumatics(Brain.ThreeWirePort.F);
+//vision
+
+pneumatics Indexer = pneumatics(Brain.ThreeWirePort.H);
+pneumatics ExpansionPneumatic = pneumatics(Brain.ThreeWirePort.G);
+
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
  *
