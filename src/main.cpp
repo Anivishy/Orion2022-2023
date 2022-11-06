@@ -18,7 +18,8 @@
 using namespace vex;
 
 void usercontrol(void) {
-  //user control code 
+  
+  //user control code for 4 motor drive
   while (1) {
     
     //driving forward/backward
@@ -30,7 +31,7 @@ void usercontrol(void) {
     }
 
     //turning  
-    else if(Controller1.Axis1.position(percent) > 20){
+    else if(Controller1.Axis1.position(percent) > 20 || Controller1.Axis1.position(percent) < -20){
       RightMotorC.spin(fwd, Controller1.Axis1.value(), velocityUnits::pct);
       LeftMotorA.spin(fwd, Controller1.Axis1.value(), velocityUnits::pct);
       RightMotorA.spin(directionType::rev, Controller1.Axis1.value(), velocityUnits::pct);
@@ -47,10 +48,53 @@ void usercontrol(void) {
     wait(20, msec); 
 
   }
+
+  /* user control code for 6 motor drive - haven't tested 
+  while (1) {
+    
+    //driving forward/backward
+    if(Controller1.Axis2.position(percent) > 20 || Controller1.Axis2.position(percent) < -20) {
+      
+      RightMotorA.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
+      RightMotorB.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
+      RightMotorC.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
+      LeftMotorA.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
+      LeftMotorB.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
+      LeftMotorC.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
+
+    }
+
+    //turning  
+    else if(Controller1.Axis1.position(percent) > 20 || Controller1.Axis1.position(percent) < -20){
+
+      RightMotorA.spin(fwd, Controller1.Axis1.value(), velocityUnits::pct);
+      RightMotorB.spin(fwd, Controller1.Axis1.value(), velocityUnits::pct);
+      RightMotorC.spin(fwd, Controller1.Axis1.value(), velocityUnits::pct);
+      LeftMotorA.spin(directionType::rev, Controller1.Axis1.value(), velocityUnits::pct);
+      LeftMotorB.spin(directionType::rev, Controller1.Axis1.value(), velocityUnits::pct);
+      LeftMotorC.spin(directionType::rev, Controller1.Axis1.value(), velocityUnits::pct);
+
+    }
+
+    else {
+
+      RightMotorA.stop(brake);
+      RightMotorB.stop(brake);
+      RightMotorC.stop(brake);
+      LeftMotorA.stop(brake);
+      LeftMotorB.stop(brake);
+      LeftMotorC.stop(brake);
+      
+    }
+  
+    wait(20, msec); 
+  
+  }
+  */
 }
 
 int main() {
-  // Initializing Robot Configuration. DO NOT REMOVE!
+  // Initializing Robot Configuration
   vexcodeInit();
   
 }
