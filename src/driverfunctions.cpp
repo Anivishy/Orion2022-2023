@@ -37,47 +37,45 @@ void tank_drive_Do(){
   */
 
   // user control code for 6 motor drive - haven't tested 
-  while (1) {
+ 
+  
+  //driving forward/backward - right side
+  if(Controller1.Axis2.position(percent) > 50 || Controller1.Axis2.position(percent) < -50) {
     
-    //driving forward/backward - right side
-    if(Controller1.Axis2.position(percent) > 50 || Controller1.Axis2.position(percent) < -50) {
-      
-      RightMotorFront.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-      RightMotorMiddle.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-      RightMotorBack.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
+    RightMotorFront.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
+    RightMotorMiddle.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
+    RightMotorBack.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
 
-    }
-
-    // break - right side
-    else {
-
-      RightMotorFront.stop(brake);
-      RightMotorMiddle.stop(brake);
-      RightMotorBack.stop(brake);
-      
-    }
-
-    //driving forward/backward - left side
-    if(Controller1.Axis3.position(percent) > 50 || Controller1.Axis3.position(percent) < -50) {
-      
-      LeftMotorFront.spin(fwd, Controller1.Axis3.value(), velocityUnits::pct);
-      LeftMotorMiddle.spin(fwd, Controller1.Axis3.value(), velocityUnits::pct);
-      LeftMotorBack.spin(fwd, Controller1.Axis3.value(), velocityUnits::pct);
-
-    }
-
-    // break - left side
-    else {
-
-      LeftMotorFront.stop(brake);
-      LeftMotorMiddle.stop(brake);
-      LeftMotorBack.stop(brake);
-      
-    }
-  
-    wait(20, msec); 
-  
   }
+
+  // break - right side
+  else {
+
+    RightMotorFront.stop(brake);
+    RightMotorMiddle.stop(brake);
+    RightMotorBack.stop(brake);
+    
+  }
+
+  //driving forward/backward - left side
+  if(Controller1.Axis3.position(percent) > 50 || Controller1.Axis3.position(percent) < -50) {
+    
+    LeftMotorFront.spin(fwd, Controller1.Axis3.value(), velocityUnits::pct);
+    LeftMotorMiddle.spin(fwd, Controller1.Axis3.value(), velocityUnits::pct);
+    LeftMotorBack.spin(fwd, Controller1.Axis3.value(), velocityUnits::pct);
+
+  }
+
+  // break - left side
+  else {
+
+    LeftMotorFront.stop(brake);
+    LeftMotorMiddle.stop(brake);
+    LeftMotorBack.stop(brake);
+    
+  }
+
+  wait(20, msec); 
 
 }
 
@@ -94,15 +92,19 @@ void singleShot(){
 
 void tripleShot(){
   Indexer.open();
-  wait (100, msec);
+  wait (300, msec);
   Indexer.close();
 
-  Indexer.open();
-  wait (100, msec);
-  Indexer.close();
+  wait(700, msec);
 
   Indexer.open();
-  wait (100, msec);
+  wait (300, msec);
+  Indexer.close();
+
+  wait(700, msec);
+
+  Indexer.open();
+  wait (300, msec);
   Indexer.close();
 }
 
@@ -151,4 +153,31 @@ void intake_Do(){
   else{
     IntakeMotor.stop();
   }
+}
+
+// FLYWHEEL CODE
+double flywheel_speed = 0;
+int f_count = 0;
+
+// flywheel init
+void flywheel_Init(){
+  FlywheelMotor.stop();
+}
+
+void flywheel_Do(){
+  FlywheelMotor.spin(reverse, flywheel_speed, pct);
+}
+
+void flywheel_toggle(){
+  f_count ++;
+  if (f_count % 2 == 1){
+    flywheel_speed = 75;
+  }
+  else{
+    flywheel_speed = 61;
+  }
+}
+
+void change_speed(){
+  Controller1.ButtonL1.pressed(flywheel_toggle);
 }
