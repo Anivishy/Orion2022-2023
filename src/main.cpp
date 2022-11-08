@@ -1,100 +1,134 @@
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
-/*    Author:       C:\Users\anivi                                            */
-/*    Created:      Wed Sep 07 2022                                           */
-/*    Description:  V5 project                                                */
+/*    Author:       VEX                                                       */
+/*    Created:      Thu Sep 26 2019                                           */
+/*    Description:  Competition Template                                      */
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 // ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// EncoderA             encoder       A, B
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
 #include "driverFunctions.h"
-#include "turningAutonFunctions.h"
-#include "forward-backward-pid.h"
+//#include "visionSensorConfig.h"
 
 using namespace vex;
 
+// A global instance of competition
+competition Competition;
+
+// define your global instances of motors and other devices here
+/*int count = 0;
+int speed = 0;
+int view = 0;
+int regulator = 1;
+int perspectiveToggle = 1;*/
+
+void ctrlrDisplayInt(int variable, int row, int col) {
+  Controller1.Screen.setCursor(row, col);
+  Controller1.Screen.clearLine();
+  Controller1.Screen.print(variable);
+}
+void ctrlrDisplayDouble(double variable, int row, int col) {
+  Controller1.Screen.setCursor(row, col);
+  Controller1.Screen.clearLine();
+  Controller1.Screen.print(variable);
+}
+void ctrlrDisplayClear(int row, int col) {
+  Controller1.Screen.setCursor(row, col);
+  Controller1.Screen.clearLine();
+}
+
+/*void perspective(){
+  count++;
+ }*/
+
+
+  
+
+/*---------------------------------------------------------------------------*/
+/*                          Pre-Autonomous Functions                         */ //driving forward/backward
+  /*                                                                           */
+/*  You may want to perform some actions before the competition starts.      */
+/*  Do them in the following function.  You must return from this function   */
+/*  or the autonomous and usercontrol tasks will not be started.  This       */
+/*  function is only called once after the V5 has been powered on and        */
+/*  not every time that the robot is disabled.                               */
+/*---------------------------------------------------------------------------*/
+
+
+void pre_auton(void) {
+  // Initializing Robot Configuration. DO NOT REMOVE!
+  vexcodeInit();
+  //gyroS.calibrate();
+  //while(gyroS.isCalibrating()) wait(10, msec);
+  //L.stop(vex::brakeType::brake);
+  
+  ////R.stop(vex::brakeType::brake);
+  //lEncoder.resetRotation();
+  //rEncoder.resetRotation();
+  //Bevel.setPosition(0, rev);
+  //Bevel.setPosition(0, rev);  
+  //Controller1.ButtonA.pressed(calibrate);
+
+  // All activities that occur before the competition starts
+  // Example: clearing encoders, setting servo positions, ...
+}
+
+/*---------------------------------------------------------------------------*/
+/*                                                                           */
+/*                              Autonomous Task                              */
+/*                                                                           */
+/*  This task is used to control your robot during the autonomous phase of   */
+/*  a VEX Competition.                                                       */
+/*                                                                           */
+/*  You must modify the code to add your own robot specific commands here.   */
+/*---------------------------------------------------------------------------*/
+
+void autonomous(void) {
+  // ..........................................................................
+  // Insert autonomous user code here.
+  // ..........................................................................
+
+}
+
 void usercontrol(void) {
+  //init
+  tank_drive_Init();
+  Indexer_Init();
+  expand_Init();
   
-  //user control code for 4 motor drive
+
   while (1) {
-    
-    //driving forward/backward
-    if(Controller1.Axis2.position(percent) > 20 || Controller1.Axis2.position(percent) < -20) {
-      RightMotorC.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-      LeftMotorA.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-      RightMotorA.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-      RightMotorB.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-    }
+    tank_drive_Do();
+    IndexerSingleShot_Do();
+    IndexerTripleShot_Do();
+    expand_Do();
 
-    //turning  
-    else if(Controller1.Axis1.position(percent) > 20 || Controller1.Axis1.position(percent) < -20){
-      RightMotorC.spin(fwd, Controller1.Axis1.value(), velocityUnits::pct);
-      LeftMotorA.spin(fwd, Controller1.Axis1.value(), velocityUnits::pct);
-      RightMotorA.spin(directionType::rev, Controller1.Axis1.value(), velocityUnits::pct);
-      RightMotorB.spin(directionType::rev, Controller1.Axis1.value(), velocityUnits::pct);
-    }
-
-    else {
-      RightMotorC.stop(brake);
-      LeftMotorA.stop(brake);
-      RightMotorA.stop(brake);
-      RightMotorB.stop(brake);
-    }
-
-    wait(20, msec); 
-
+    wait(1, msec); /* Sleep the task for a short amount of time to
+                     prevent wasted resources. */
+                  
   }
-
-  /* user control code for 6 motor drive - haven't tested 
-  while (1) {
-    
-    //driving forward/backward
-    if(Controller1.Axis2.position(percent) > 20 || Controller1.Axis2.position(percent) < -20) {
-      
-      RightMotorA.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-      RightMotorB.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-      RightMotorC.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-      LeftMotorA.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-      LeftMotorB.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-      LeftMotorC.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-
-    }
-
-    //turning  
-    else if(Controller1.Axis1.position(percent) > 20 || Controller1.Axis1.position(percent) < -20){
-
-      RightMotorA.spin(fwd, Controller1.Axis1.value(), velocityUnits::pct);
-      RightMotorB.spin(fwd, Controller1.Axis1.value(), velocityUnits::pct);
-      RightMotorC.spin(fwd, Controller1.Axis1.value(), velocityUnits::pct);
-      LeftMotorA.spin(directionType::rev, Controller1.Axis1.value(), velocityUnits::pct);
-      LeftMotorB.spin(directionType::rev, Controller1.Axis1.value(), velocityUnits::pct);
-      LeftMotorC.spin(directionType::rev, Controller1.Axis1.value(), velocityUnits::pct);
-
-    }
-
-    else {
-
-      RightMotorA.stop(brake);
-      RightMotorB.stop(brake);
-      RightMotorC.stop(brake);
-      LeftMotorA.stop(brake);
-      LeftMotorB.stop(brake);
-      LeftMotorC.stop(brake);
-      
-    }
-  
-    wait(20, msec); 
-  
-  }
-  */
 }
 
 int main() {
-  // Initializing Robot Configuration
-  vexcodeInit();
-  
+  // Set up callbacks for autonomous and driver control periods.
+  Competition.autonomous(autonomous);
+  Competition.drivercontrol(usercontrol);
+  //Controller1.ButtonUp.pressed(Toggle);
+
+  // Run the pre-autonomous function.
+  pre_auton();
+
+  // Prevent main from exiting with an infinite loop.
+  while (true) {
+    wait(100, msec);
+  }
 }
+

@@ -16,6 +16,8 @@ extern motor_group LeftDrive;
 extern pneumatics Indexer;
 extern pneumatics ExpansionPneumatic;
 
+extern motor IntakeMotor;
+
 //extern inertial gyroS;
 //vision
 
