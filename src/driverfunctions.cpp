@@ -8,6 +8,7 @@ void tank_drive_Init(){
 
 void tank_drive_Do(){
   /*
+    // code for 4 motor drive
     if(Controller1.Axis2.position(percent) > 20 || Controller1.Axis2.position(percent) < -20) {
       RightMotorC.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
       LeftMotorA.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
@@ -35,49 +36,48 @@ void tank_drive_Do(){
   }
   */
 
-  /* user control code for 6 motor drive - haven't tested 
+  // user control code for 6 motor drive - haven't tested 
   while (1) {
     
-    //driving forward/backward
-    if(Controller1.Axis2.position(percent) > 20 || Controller1.Axis2.position(percent) < -20) {
+    //driving forward/backward - right side
+    if(Controller1.Axis2.position(percent) > 50 || Controller1.Axis2.position(percent) < -50) {
       
-      RightMotorA.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-      RightMotorB.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-      RightMotorC.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-      LeftMotorA.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-      LeftMotorB.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
-      LeftMotorC.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
+      RightMotorFront.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
+      RightMotorMiddle.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
+      RightMotorBack.spin(fwd, Controller1.Axis2.value(), velocityUnits::pct);
 
     }
 
-    //turning  
-    else if(Controller1.Axis1.position(percent) > 20 || Controller1.Axis1.position(percent) < -20){
-
-      RightMotorA.spin(fwd, Controller1.Axis1.value(), velocityUnits::pct);
-      RightMotorB.spin(fwd, Controller1.Axis1.value(), velocityUnits::pct);
-      RightMotorC.spin(fwd, Controller1.Axis1.value(), velocityUnits::pct);
-      LeftMotorA.spin(directionType::rev, Controller1.Axis1.value(), velocityUnits::pct);
-      LeftMotorB.spin(directionType::rev, Controller1.Axis1.value(), velocityUnits::pct);
-      LeftMotorC.spin(directionType::rev, Controller1.Axis1.value(), velocityUnits::pct);
-
-    }
-
+    // break - right side
     else {
 
-      RightMotorA.stop(brake);
-      RightMotorB.stop(brake);
-      RightMotorC.stop(brake);
-      LeftMotorA.stop(brake);
-      LeftMotorB.stop(brake);
-      LeftMotorC.stop(brake);
+      RightMotorFront.stop(brake);
+      RightMotorMiddle.stop(brake);
+      RightMotorBack.stop(brake);
+      
+    }
+
+    //driving forward/backward - left side
+    if(Controller1.Axis3.position(percent) > 50 || Controller1.Axis3.position(percent) < -50) {
+      
+      LeftMotorFront.spin(fwd, Controller1.Axis3.value(), velocityUnits::pct);
+      LeftMotorMiddle.spin(fwd, Controller1.Axis3.value(), velocityUnits::pct);
+      LeftMotorBack.spin(fwd, Controller1.Axis3.value(), velocityUnits::pct);
+
+    }
+
+    // break - left side
+    else {
+
+      LeftMotorFront.stop(brake);
+      LeftMotorMiddle.stop(brake);
+      LeftMotorBack.stop(brake);
       
     }
   
     wait(20, msec); 
   
   }
-  */
-  
 
 }
 
