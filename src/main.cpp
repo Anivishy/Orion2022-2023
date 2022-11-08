@@ -103,6 +103,7 @@ void usercontrol(void) {
   tank_drive_Init();
   Indexer_Init();
   expand_Init();
+  intake_Init();
   
 
   while (1) {
@@ -110,6 +111,7 @@ void usercontrol(void) {
     IndexerSingleShot_Do();
     IndexerTripleShot_Do();
     expand_Do();
+    intake_Do();
 
     wait(1, msec); /* Sleep the task for a short amount of time to
                      prevent wasted resources. */
