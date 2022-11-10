@@ -66,16 +66,9 @@ void ctrlrDisplayClear(int row, int col) {
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  //gyroS.calibrate();
-  //while(gyroS.isCalibrating()) wait(10, msec);
-  //L.stop(vex::brakeType::brake);
-  
-  ////R.stop(vex::brakeType::brake);
-  //lEncoder.resetRotation();
-  //rEncoder.resetRotation();
-  //Bevel.setPosition(0, rev);
-  //Bevel.setPosition(0, rev);  
-  //Controller1.ButtonA.pressed(calibrate);
+  gyroS.calibrate();
+  while(gyroS.isCalibrating()) wait(10, msec);
+
 
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...

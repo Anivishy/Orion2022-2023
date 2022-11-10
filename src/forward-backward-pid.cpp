@@ -1,6 +1,50 @@
 #include "vex.h"
 #include "math.h"
 
+void gyroMove(double distance, double velocity, double turnAngle) {
+  double startLPos = LeftDrive.position(rev);
+  double startRPos = RightDrive.position(rev);
+  double k1 = 3.0;
+  //double k2 = 1.2;
+
+  LeftDrive.spin(forward, velocity, pct);
+  RightDrive.spin(forward, velocity, pct);
+  //while (distance > fabs((lEncoder.position(rev)-startLPos + rEncoder.position(rev)-startRPos) / 2.0)) {
+  while (distance > fabs((LeftDrive.position(rev)- startLPos + RightDrive.position(rev) - startRPos) / 2.0)) {
+    /*Controller1.Screen.clearScreen();
+    Controller1.Screen.setCursor(1, 1);
+    Controller1.Screen.print(gyroS.yaw());*/
+
+    double error = gyroS.yaw() - turnAngle; // positive when right of ideal angle
+    double adjustment = error*k1;
+    if (fabs(adjustment) > 30.0) adjustment = 30.0*(adjustment/fabs(adjustment));
+    if (fabs(error) < 0.25) adjustment = 0;
+   
+    if ((velocity > 0 && adjustment > 0) || (velocity < 0 && adjustment < 0)) RightDrive.setVelocity(velocity - (adjustment - 5), pct);
+    else LeftDrive.setVelocity(velocity + (adjustment - 5), pct);
+
+    /*Controller1.Screen.clearScreen();
+    Controller1.Screen.setCursor(1, 1);
+    Controller1.Screen.print(adjustment);
+    Controller1.Screen.newLine();
+    Controller1.Screen.print(error);*/
+  }
+  LeftDrive.stop();
+  RightDrive.stop();
+  LeftDrive.resetRotation();
+  RightDrive.resetRotation();
+  /*Controller1.Screen.clearLine();
+  Controller1.Screen.print(gyroS.yaw());*/
+
+  /*while (1) {
+    Controller1.Screen.clearScreen();
+    Controller1.Screen.setCursor(1, 1);
+    Controller1.Screen.print(gyroS.pitch());
+    Controller1.Screen.print(gyroS.roll());
+    Controller1.Screen.print(gyroS.yaw());
+  }*/
+}
+
 // double TRACKWHEEL_CIRCUM = 2.75;
 // double DRIVE_CIRCUM = 2.75;
 

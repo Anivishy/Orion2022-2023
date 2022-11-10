@@ -1,0 +1,1 @@
+void gyroMove(double distance, double velocity, double turnAngle);

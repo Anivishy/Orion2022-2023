@@ -19,6 +19,8 @@ extern pneumatics ExpansionPneumatic;
 extern motor IntakeMotor;
 extern motor FlywheelMotor;
 
+extern inertial gyroS;
+
 //extern inertial gyroS;
 //vision
 

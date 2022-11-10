@@ -30,6 +30,8 @@ encoder MiddleEncoder = encoder(Brain.ThreeWirePort.C);
 pneumatics Indexer = pneumatics(Brain.ThreeWirePort.H);
 pneumatics ExpansionPneumatic = pneumatics(Brain.ThreeWirePort.G);
 
+inertial gyroS = inertial(PORT10);
+
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
  *
