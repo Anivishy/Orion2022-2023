@@ -5,7 +5,7 @@
 
 
 
-double anglekP = 0.235;
+double anglekP = 0.535;
 double anglekI = 0.0;
 double anglekD = 0.25;
 

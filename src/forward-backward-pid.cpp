@@ -1,27 +1,27 @@
 #include "vex.h"
 #include "math.h"
 
-void gyroMove(double distance, double velocity, double turnAngle) {
+void gyroMove(double distance, double speed, double turnAngle) {
   double startLPos = LeftDrive.position(rev);
   double startRPos = RightDrive.position(rev);
   double k1 = 3.0;
   //double k2 = 1.2;
 
-  LeftDrive.spin(forward, velocity, pct);
-  RightDrive.spin(forward, velocity, pct);
+  LeftDrive.spin(forward, speed,  pct);
+  RightDrive.spin(forward, speed, pct);
   //while (distance > fabs((lEncoder.position(rev)-startLPos + rEncoder.position(rev)-startRPos) / 2.0)) {
   while (distance > fabs((LeftDrive.position(rev)- startLPos + RightDrive.position(rev) - startRPos) / 2.0)) {
     /*Controller1.Screen.clearScreen();
     Controller1.Screen.setCursor(1, 1);
     Controller1.Screen.print(gyroS.yaw());*/
 
-    double error = gyroS.heading() - turnAngle; // positive when right of ideal angle
+    double error = gyroS.yaw() - turnAngle; // positive when right of ideal angle
     double adjustment = error*k1;
     if (fabs(adjustment) > 30.0) adjustment = 30.0*(adjustment/fabs(adjustment));
     if (fabs(error) < 0.25) adjustment = 0;
    
-    if ((velocity > 0 && adjustment > 0) || (velocity < 0 && adjustment < 0)) RightDrive.setVelocity(velocity - (adjustment - 5), pct);
-    else LeftDrive.setVelocity(velocity + (adjustment - 5), pct);
+    if ((speed > 0 && adjustment > 0) || (speed < 0 && adjustment < 0)) RightDrive.setVelocity(speed - (adjustment - 5), pct);
+    else LeftDrive.setVelocity(speed + (adjustment - 5), pct);
 
     /*Controller1.Screen.clearScreen();
     Controller1.Screen.setCursor(1, 1);
@@ -47,7 +47,7 @@ void gyroMove(double distance, double velocity, double turnAngle) {
 
 void runFlywheel(double speed, bool needsToRun) {
   if( needsToRun ) {
-    FlywheelMotor.setVelocity(speed, pct);
+    FlywheelMotor.spin(forward, speed, pct);
   } else {
     FlywheelMotor.stop();
   }

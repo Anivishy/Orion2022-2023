@@ -74,7 +74,7 @@ void pre_auton(void) {
   vexcodeInit();
   gyroS.calibrate();
   while(gyroS.isCalibrating()) wait(10, msec);
-
+  Indexer_Init();
 
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...

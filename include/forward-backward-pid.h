@@ -1,3 +1,3 @@
-void gyroMove(double distance, double velocity, double turnAngle);
+void gyroMove(double distance, double speed, double turnAngle);
 
 void runFlywheel(double speed, bool needsToRun);

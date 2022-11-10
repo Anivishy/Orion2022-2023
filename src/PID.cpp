@@ -55,6 +55,10 @@ int drivePID(int desiredValue, int desiredTurnValue, bool resetDriveSensors) {
 
     error = averagePosition - desiredValue;
 
+    if( error < 10 ) {
+      return 1;
+    }
+
     derivative = error - prevError;
 
     //totalError += error;
@@ -88,6 +92,8 @@ int drivePID(int desiredValue, int desiredTurnValue, bool resetDriveSensors) {
     // Brain.Screen.setCursor(2, 1);
     // Brain.Screen.print(rightDrivePosition);
     vex::task::sleep(20);
+
+    
   }
 
   Brain.Screen.print(testl);
