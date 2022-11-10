@@ -15,7 +15,7 @@ void gyroMove(double distance, double velocity, double turnAngle) {
     Controller1.Screen.setCursor(1, 1);
     Controller1.Screen.print(gyroS.yaw());*/
 
-    double error = gyroS.yaw() - turnAngle; // positive when right of ideal angle
+    double error = gyroS.heading() - turnAngle; // positive when right of ideal angle
     double adjustment = error*k1;
     if (fabs(adjustment) > 30.0) adjustment = 30.0*(adjustment/fabs(adjustment));
     if (fabs(error) < 0.25) adjustment = 0;
@@ -43,6 +43,14 @@ void gyroMove(double distance, double velocity, double turnAngle) {
     Controller1.Screen.print(gyroS.roll());
     Controller1.Screen.print(gyroS.yaw());
   }*/
+}
+
+void runFlywheel(double speed, bool needsToRun) {
+  if( needsToRun ) {
+    FlywheelMotor.setVelocity(speed, pct);
+  } else {
+    FlywheelMotor.stop();
+  }
 }
 
 // double TRACKWHEEL_CIRCUM = 2.75;

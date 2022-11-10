@@ -16,6 +16,12 @@
 
 #include "vex.h"
 #include "driverFunctions.h"
+
+////////////////////////////////////////////////
+//AUTON ROUTINES
+////////////////////////////////////////////////
+#include "HalfLeftSide.h"
+
 //#include "visionSensorConfig.h"
 
 using namespace vex;
@@ -88,7 +94,7 @@ void autonomous(void) {
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
-
+  halfLeftSide();
 }
 
 void usercontrol(void) {
