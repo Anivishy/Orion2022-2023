@@ -10,3 +10,7 @@ void expand_Do();
 
 void intake_Init();
 void intake_Do();
+
+void flywheel_Init();
+void flywheel_Do();
+void change_speed();

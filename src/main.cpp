@@ -104,6 +104,7 @@ void usercontrol(void) {
   Indexer_Init();
   expand_Init();
   intake_Init();
+  flywheel_Init();
   
 
   while (1) {
@@ -112,6 +113,8 @@ void usercontrol(void) {
     IndexerTripleShot_Do();
     expand_Do();
     intake_Do();
+    flywheel_Do();
+    change_speed();
 
     wait(1, msec); /* Sleep the task for a short amount of time to
                      prevent wasted resources. */

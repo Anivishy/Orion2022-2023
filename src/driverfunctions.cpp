@@ -86,7 +86,7 @@ void tank_drive_Do(){
 //Indexer FUNCTIONS
 void singleShot(){
   Indexer.open();
-  wait (100, msec);
+  wait (300, msec);
   Indexer.close();
 }
 
@@ -135,7 +135,7 @@ void expand_Init(){
   
 void expand_Do(){
   if(Controller1.ButtonY.pressing()){
-    Controller1.ButtonRight.pressed(expand);
+    Controller1.ButtonLeft.pressed(expand);
   }
 }
 
@@ -144,10 +144,10 @@ void intake_Init(){
 }
 
 void intake_Do(){
-  if (Controller1.ButtonR1.pressing()){
+  if (Controller1.ButtonR2.pressing()){
     IntakeMotor.spin(reverse, 100, pct);
   }
-  else if (Controller1.ButtonR2.pressing()){
+  else if (Controller1.ButtonR1.pressing()){
     IntakeMotor.spin(forward, 100, pct);
   }
   else{
@@ -165,7 +165,7 @@ void flywheel_Init(){
 }
 
 void flywheel_Do(){
-  FlywheelMotor.spin(reverse, flywheel_speed, pct);
+  FlywheelMotor.spin(forward, flywheel_speed, pct);
 }
 
 void flywheel_toggle(){
@@ -179,5 +179,5 @@ void flywheel_toggle(){
 }
 
 void change_speed(){
-  Controller1.ButtonL1.pressed(flywheel_toggle);
+  Controller1.ButtonRight.pressed(flywheel_toggle);
 }
