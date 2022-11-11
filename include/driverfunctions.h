@@ -5,6 +5,9 @@ void Indexer_Init();
 void IndexerSingleShot_Do();
 void IndexerTripleShot_Do();
 
+void singleShot();
+
+
 void expand_Init();
 void expand_Do();
 

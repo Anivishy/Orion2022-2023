@@ -50,7 +50,7 @@ int turnPID(int desiredAngle,  bool resetGyroSensor) {
 
     anglePrevError = angleError;
     
-    if( angleError > 0 ) {
+    if( angleError < 3 ) {
       LeftDrive.stop();
       RightDrive.stop();
       return 1;
@@ -58,7 +58,7 @@ int turnPID(int desiredAngle,  bool resetGyroSensor) {
 
     
     //Brain.Screen.print(sensorAngle);
-    vex::task::sleep(20);
+    wait(20, msec);
   }
 
   return 1;
