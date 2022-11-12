@@ -1,5 +1,7 @@
 void tank_drive_Init();
 void tank_drive_Do();
+void driveMoveSlope_Init();
+void driveMoveSlope_Do();
 
 void Indexer_Init();
 void IndexerSingleShot_Do();

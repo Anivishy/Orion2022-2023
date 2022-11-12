@@ -1,6 +1,49 @@
 #include "vex.h"
 
 //Driver Control
+
+double a1Velocity;
+double a3Velocity;
+double a4Velocity;
+
+double driveIncrement = 10;
+
+void driveMoveSlope_Init() {
+  a1Velocity = a3Velocity = a4Velocity = 0;
+ 
+  LeftDrive.setVelocity(0, pct);
+  RightDrive.setVelocity(0, pct);
+  LeftDrive.spin(forward);
+  RightDrive.spin(forward);
+}
+
+void calcIncrement(double goalValue, double& velocity, double increment) {
+  if (goalValue > velocity + increment/2) {
+      velocity += increment;
+  } else if (goalValue < velocity - increment/2) {
+    velocity -= increment;
+  } else {
+    velocity = goalValue;
+  }
+}
+
+void driveMoveSlope_Do() {
+  double axis1 = Controller1.Axis1.position(percent);
+  double axis3 = Controller1.Axis3.position(percent);
+  //double axis4 = Controller1.Axis4.position(percent);
+
+  calcIncrement(axis1, a1Velocity, driveIncrement);
+  calcIncrement(axis3, a3Velocity, driveIncrement);
+  //calcIncrement(axis4, a4Velocity, driveIncrement);
+
+  LeftMotorFront.setVelocity((a3Velocity) /*- a4Velocity*/ + (a1Velocity * 0.3), pct);
+  LeftMotorMiddle.setVelocity((a3Velocity) /*- a4Velocity*/ + (a1Velocity * 0.3), pct);
+  LeftMotorBack.setVelocity((a3Velocity) /*+ a4Velocity*/ + (a1Velocity * 0.3), pct);
+  RightMotorFront.setVelocity((a3Velocity) /*+ a4Velocity */ - (a1Velocity * 0.3), pct);
+  RightMotorMiddle.setVelocity((a3Velocity) /*+ a4Velocity */ - (a1Velocity * 0.3), pct);
+  RightMotorBack.setVelocity((a3Velocity) /*- a4Velocity */ - (a1Velocity * 0.3), pct);
+}
+
 void tank_drive_Init(){
   RightDrive.stop();
   LeftDrive.stop();
@@ -134,9 +177,7 @@ void expand_Init(){
 }
   
 void expand_Do(){
-  if(Controller1.ButtonY.pressing()){
-    Controller1.ButtonLeft.pressed(expand);
-  }
+  Controller1.ButtonLeft.pressed(expand);
 }
 
 void intake_Init(){

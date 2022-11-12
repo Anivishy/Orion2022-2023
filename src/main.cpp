@@ -99,7 +99,8 @@ void autonomous(void) {
 
 void usercontrol(void) {
   //init
-  tank_drive_Init();
+  //tank_drive_Init();
+  driveMoveSlope_Init();
   Indexer_Init();
   expand_Init();
   intake_Init();
@@ -107,7 +108,8 @@ void usercontrol(void) {
   
 
   while (1) {
-    tank_drive_Do();
+    //tank_drive_Do();
+    driveMoveSlope_Do();
     IndexerSingleShot_Do();
     IndexerTripleShot_Do();
     expand_Do();
