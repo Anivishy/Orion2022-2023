@@ -7,8 +7,8 @@ void gyroMove(double distance, double speed, double turnAngle) {
   double k1 = 3.0;
   //double k2 = 1.2;
 
-  LeftDrive.spin(forward, speed,  pct);
-  RightDrive.spin(forward, speed, pct);
+  LeftDrive.spin(reverse, speed,  pct);
+  RightDrive.spin(reverse, speed, pct);
   //while (distance > fabs((lEncoder.position(rev)-startLPos + rEncoder.position(rev)-startRPos) / 2.0)) {
   while (distance > fabs((LeftDrive.position(rev)- startLPos + RightDrive.position(rev) - startRPos) / 2.0)) {
     /*Controller1.Screen.clearScreen();

@@ -6,9 +6,9 @@ double TRACKWHEEL_CIRCUM = 2.75;
 double DRIVE_CIRCUM = 4*3.141592;
 
 
-double kP = 0.01;
+double kP = 0.1;
 double kI = 0.0;
-double kD = 0.01;
+double kD = 0.0;
 
 double turnkP = 0.0;
 double turnkI = 0.0;
@@ -28,10 +28,9 @@ int turnTotalError = 0;
 
 bool enableDrivePID = true;
 
-int drivePID(int desiredValue, int desiredTurnValue, bool resetDriveSensors) {
+int drivePIDBackward(int desiredValue, int desiredTurnValue, bool resetDriveSensors) {
 
-  double testl;
-  double testr;
+
   while( enableDrivePID ) {
 
     if( resetDriveSensors ) {
@@ -45,19 +44,19 @@ int drivePID(int desiredValue, int desiredTurnValue, bool resetDriveSensors) {
 
     }
 
+    
+
     double leftDrivePosition = -1 * ( ( LeftMotorFront.position(degrees) + LeftMotorBack.position(degrees) + LeftMotorMiddle.position(degrees) ) / 3.0 );
     double rightDrivePosition = -1 * ( ( RightMotorFront.position(degrees) + RightMotorBack.position(degrees) + RightMotorMiddle.position(degrees) )  / 3.0 );
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Forward Backward Movement
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    double averagePosition = ( leftDrivePosition);
+    double averagePosition = ( leftDrivePosition + rightDrivePosition ) / 2.0;
 
     error = averagePosition - desiredValue;
 
-    if( error < 10 ) {
-      return 1;
-    }
+  
 
     derivative = error - prevError;
 
@@ -68,26 +67,30 @@ int drivePID(int desiredValue, int desiredTurnValue, bool resetDriveSensors) {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Turning Movement PID
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    double turnDifference = leftDrivePosition - rightDrivePosition;
+    // double turnDifference = leftDrivePosition - rightDrivePosition;
 
-    turnError = turnDifference - desiredTurnValue;
+    // turnError = turnDifference - desiredTurnValue;
 
-    turnDerivative = turnError - turnPrevError;
+    // turnDerivative = turnError - turnPrevError;
 
-    //turnTotalError += turnError;
+    // //turnTotalError += turnError;
 
-    double turnMotorPower = turnError * turnkP + turnDerivative * turnkD;
+    // double turnMotorPower = turnError * turnkP + turnDerivative * turnkD;
 
 
-    LeftDrive.spin(forward, lateralMotorPower + turnMotorPower, voltageUnits::volt);
-    RightDrive.spin(forward, lateralMotorPower - turnMotorPower, voltageUnits::volt);
+    LeftDrive.spin(forward, lateralMotorPower, voltageUnits::volt);
+    RightDrive.spin(forward, lateralMotorPower, voltageUnits::volt);
 
 
     prevError = error;
-    turnPrevError = turnError;
+    //turnPrevError = turnError;
 
-    testl = leftDrivePosition;
-    testr = rightDrivePosition;    
+    if( error >= -3 ) { 
+      LeftDrive.stop();
+      RightDrive.stop();
+      Brain.Screen.print("HII");
+      return 1;
+    }
     
     // Brain.Screen.setCursor(2, 1);
     // Brain.Screen.print(rightDrivePosition);
@@ -96,14 +99,81 @@ int drivePID(int desiredValue, int desiredTurnValue, bool resetDriveSensors) {
     
   }
 
-  Brain.Screen.print(testl);
-  
-  Brain.Screen.print(testr);
 
   return 1;
 }
 
+// int drivePIDForward(int desiredValue, int desiredTurnValue, bool resetDriveSensors) {
 
-// void moveDrive(double inches) {
-//   double desiredValue = 360/
+
+//   while( enableDrivePID ) {
+
+//     if( resetDriveSensors ) {
+//       resetDriveSensors = false;
+
+//       LeftMotorFront.setPosition(0, degrees);
+//       LeftMotorBack.setPosition(0, degrees);
+
+//       RightMotorFront.setPosition(0, degrees);
+//       RightMotorBack.setPosition(0, degrees);
+
+//     }
+
+    
+
+//     double leftDrivePosition = ( ( LeftMotorFront.position(degrees) + LeftMotorBack.position(degrees) + LeftMotorMiddle.position(degrees) ) / 3.0 );
+//     double rightDrivePosition = ( ( RightMotorFront.position(degrees) + RightMotorBack.position(degrees) + RightMotorMiddle.position(degrees) )  / 3.0 );
+    
+//     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//     // Forward Backward Movement
+//     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//     double averagePosition = ( leftDrivePosition + rightDrivePosition ) / 2.0;
+
+//     error = averagePosition - desiredValue;
+
+  
+
+//     derivative = error - prevError;
+
+//     //totalError += error;
+
+//     double lateralMotorPower = error * kP + derivative * kD;
+
+//     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//     // Turning Movement PID
+//     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//     // double turnDifference = leftDrivePosition - rightDrivePosition;
+
+//     // turnError = turnDifference - desiredTurnValue;
+
+//     // turnDerivative = turnError - turnPrevError;
+
+//     // //turnTotalError += turnError;
+
+//     // double turnMotorPower = turnError * turnkP + turnDerivative * turnkD;
+
+
+//     LeftDrive.spin(forward, lateralMotorPower, voltageUnits::volt);
+//     RightDrive.spin(forward, lateralMotorPower, voltageUnits::volt);
+
+
+//     prevError = error;
+//     //turnPrevError = turnError;
+
+//     if( error <= -3 ) { 
+//       LeftDrive.stop();
+//       RightDrive.stop();
+//       Brain.Screen.print("HII");
+//       return 1;
+//     }
+    
+//     // Brain.Screen.setCursor(2, 1);
+//     // Brain.Screen.print(rightDrivePosition);
+//     vex::task::sleep(20);
+
+    
+//   }
+
+
+//   return 1;
 // }
