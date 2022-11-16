@@ -6,24 +6,24 @@ using namespace vex;
 brain Brain;
 controller Controller1 = controller(primary);
 
-motor RightMotorFront = motor(PORT1, ratio18_1, true);
-motor RightMotorMiddle = motor(PORT20, ratio18_1, true);
-motor RightMotorBack = motor(PORT18, ratio18_1, false);
+motor RightMotorFront = motor(PORT9, ratio18_1, true);
+motor RightMotorMiddle = motor(PORT10, ratio18_1, true);
+motor RightMotorBack = motor(PORT11, ratio18_1, false);
 motor_group RightDrive = motor_group(RightMotorFront, RightMotorMiddle, RightMotorBack);
 
-motor LeftMotorFront = motor(PORT4, ratio18_1, false);
-motor LeftMotorMiddle = motor(PORT15, ratio18_1, false);
+motor LeftMotorFront = motor(PORT12, ratio18_1, false);
+motor LeftMotorMiddle = motor(PORT1, ratio18_1, false);
 motor LeftMotorBack = motor(PORT13, ratio18_1, true);
 motor_group LeftDrive = motor_group(LeftMotorFront, LeftMotorMiddle, LeftMotorBack);
 
-motor IntakeMotor = motor(PORT7, ratio18_1, false);
+motor IntakeMotor = motor(PORT2, ratio18_1, false);
 motor FlywheelMotor = motor(PORT8, ratio36_1, true);
 
-encoder RightEncoder = encoder(Brain.ThreeWirePort.A);
-encoder LeftEncoder = encoder(Brain.ThreeWirePort.B);
-encoder MiddleEncoder = encoder(Brain.ThreeWirePort.C);
+// encoder RightEncoder = encoder(Brain.ThreeWirePort.A);
+// encoder LeftEncoder = encoder(Brain.ThreeWirePort.B);
+// encoder MiddleEncoder = encoder(Brain.ThreeWirePort.C);
 
-inertial gyroS = inertial(PORT10);
+inertial gyroS = inertial(PORT3);
 
 //vision
 
