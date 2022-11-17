@@ -8,7 +8,7 @@ controller Controller1 = controller(primary);
 
 motor RightMotorFront = motor(PORT9, ratio18_1, true);
 motor RightMotorMiddle = motor(PORT10, ratio18_1, true);
-motor RightMotorBack = motor(PORT11, ratio18_1, false);
+motor RightMotorBack = motor(PORT3, ratio18_1, false);
 motor_group RightDrive = motor_group(RightMotorFront, RightMotorMiddle, RightMotorBack);
 
 motor LeftMotorFront = motor(PORT12, ratio18_1, false);
@@ -23,7 +23,7 @@ motor FlywheelMotor = motor(PORT8, ratio36_1, true);
 // encoder LeftEncoder = encoder(Brain.ThreeWirePort.B);
 // encoder MiddleEncoder = encoder(Brain.ThreeWirePort.C);
 
-inertial gyroS = inertial(PORT3);
+inertial gyroS = inertial(PORT11);
 
 //vision
 

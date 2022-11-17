@@ -19,8 +19,10 @@ void halfLeftSide() {
   // singleShot();
   // wait(700, msec);
   // singleShot();
+  
+  drivePIDBackward(300, 0, true);
+  Brain.Screen.print("HII");
 
-  // drivePIDForward(50, 0, true);
   // wait(3000, msec);
   // drivePIDBackward(2, 0, true);
  
