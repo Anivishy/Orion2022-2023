@@ -22,7 +22,7 @@ void halfLeftSide() {
 
   // drivePIDForward(50, 0, true);
   // wait(3000, msec);
-  drivePIDBackward(2, 0, true);
+  // drivePIDBackward(2, 0, true);
  
   
   // while( true ) {

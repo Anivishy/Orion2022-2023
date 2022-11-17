@@ -28,7 +28,7 @@ inertial gyroS = inertial(PORT3);
 //vision
 
 pneumatics Indexer = pneumatics(Brain.ThreeWirePort.H);
-pneumatics ExpansionPneumatic = pneumatics(Brain.ThreeWirePort.G);
+pneumatics ExpansionPneumatic = pneumatics(Brain.ThreeWirePort.A);
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
