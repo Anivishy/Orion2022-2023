@@ -23,6 +23,10 @@ motor FlywheelMotor = motor(PORT8, ratio36_1, true);
 // encoder LeftEncoder = encoder(Brain.ThreeWirePort.B);
 // encoder MiddleEncoder = encoder(Brain.ThreeWirePort.C);
 
+rotation leftRotation = rotation(PORT6, false);
+rotation rightRotation = rotation(PORT7, false);
+
+
 inertial gyroS = inertial(PORT11);
 
 //vision

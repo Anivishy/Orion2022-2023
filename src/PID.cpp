@@ -34,26 +34,30 @@ bool enableDrivePID = true;
 
 int drivePIDBackward(int desiredValue, int desiredTurnValue, bool resetDriveSensors) {
 
+  desiredValue = -1 * desiredValue;
 
   while( enableDrivePID ) {
 
     if( resetDriveSensors ) {
       resetDriveSensors = false;
 
-      LeftMotorFront.setPosition(0, degrees);
-      LeftMotorBack.setPosition(0, degrees);
-      LeftMotorMiddle.setPosition(0, degrees);
+      // LeftMotorFront.setPosition(0, degrees);
+      // LeftMotorBack.setPosition(0, degrees);
+      // LeftMotorMiddle.setPosition(0, degrees);
 
-      RightMotorFront.setPosition(0, degrees);
-      RightMotorBack.setPosition(0, degrees);
-      RightMotorMiddle.setPosition(0, degrees);
+      // RightMotorFront.setPosition(0, degrees);
+      // RightMotorBack.setPosition(0, degrees);
+      // RightMotorMiddle.setPosition(0, degrees);
+
+      leftRotation.setPosition(0, deg);
+      rightRotation.setPosition(0, deg);
 
     }
 
     
 
-    double leftDrivePosition = ( ( LeftMotorFront.position(degrees) + LeftMotorBack.position(degrees) + LeftMotorMiddle.position(degrees) ) / 3.0 );
-    double rightDrivePosition = ( ( RightMotorFront.position(degrees) + RightMotorBack.position(degrees) + RightMotorMiddle.position(degrees) )  / 3.0 );
+    double leftDrivePosition = ( leftRotation.position(deg) );
+    double rightDrivePosition = ( rightRotation.position(deg) );
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Forward Backward Movement

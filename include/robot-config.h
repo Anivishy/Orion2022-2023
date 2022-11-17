@@ -21,6 +21,9 @@ extern motor FlywheelMotor;
 
 extern inertial gyroS;
 
+extern rotation leftRotation;
+extern rotation rightRotation;
+
 //vision
 
 
