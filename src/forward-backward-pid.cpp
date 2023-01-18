@@ -47,9 +47,9 @@ void gyroMove(double distance, double speed, double turnAngle) {
 
 void runFlywheel(double speed, bool needsToRun) {
   if( needsToRun ) {
-    FlywheelMotor.spin(forward, speed, pct);
+    //FlywheelMotor.spin(forward, speed, pct);
   } else {
-    FlywheelMotor.stop();
+    //FlywheelMotor.stop();
   }
 }
 

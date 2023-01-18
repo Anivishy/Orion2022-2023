@@ -49,23 +49,23 @@ int drivePIDBackward(int desiredValue, int desiredTurnValue, bool resetDriveSens
       // RightMotorBack.setPosition(0, degrees);
       // RightMotorMiddle.setPosition(0, degrees);
 
-      leftRotation.setPosition(0, deg);
-      rightRotation.setPosition(0, deg);
+      //leftRotation.setPosition(0, deg);
+      //rightRotation.setPosition(0, deg);
 
     }
 
     
 
-    double leftDrivePosition = ( leftRotation.position(deg) );
-    double rightDrivePosition = ( rightRotation.position(deg) );
+    //double leftDrivePosition = ( leftRotation.position(deg) );
+    //double rightDrivePosition = ( rightRotation.position(deg) );
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Forward Backward Movement
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     
 
-    leftError = leftDrivePosition - desiredValue;
-    rightError = rightDrivePosition - desiredValue;
+    //leftError = leftDrivePosition - desiredValue;
+    //rightError = rightDrivePosition - desiredValue;
   
 
     leftDerivative = leftError - leftPrevError;

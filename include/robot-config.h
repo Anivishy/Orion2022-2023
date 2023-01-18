@@ -17,12 +17,12 @@ extern pneumatics Indexer;
 extern pneumatics ExpansionPneumatic;
 
 extern motor IntakeMotor;
-extern motor FlywheelMotor;
+extern motor CataMotor;
 
 extern inertial gyroS;
+extern line cataLine;
 
-extern rotation leftRotation;
-extern rotation rightRotation;
+extern rotation cataRotation;
 
 //vision
 

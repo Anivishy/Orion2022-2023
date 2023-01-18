@@ -201,24 +201,55 @@ double flywheel_speed = 0;
 int f_count = 0;
 
 // flywheel init
-void flywheel_Init(){
-  FlywheelMotor.stop();
-}
+// void flywheel_Init(){
+//   FlywheelMotor.stop();
+// }
 
-void flywheel_Do(){
-  FlywheelMotor.spin(forward, flywheel_speed, pct);
-}
+// void flywheel_Do(){
+//   FlywheelMotor.spin(forward, flywheel_speed, pct);
+// }
 
-void flywheel_toggle(){
-  f_count ++;
-  if (f_count % 2 == 1){
-    flywheel_speed = 75;
+// void flywheel_toggle(){
+//   f_count ++;
+//   if (f_count % 2 == 1){
+//     flywheel_speed = 75;
+//   }
+//   else{
+//     flywheel_speed = 61;
+//   }
+// }
+
+// void change_speed(){
+//   Controller1.ButtonRight.pressed(flywheel_toggle);
+// }
+
+//CATAPULT CODE
+double amount = 1150;
+void cata_shoot(){
+  CataMotor.spin(forward, 100, pct);
+  wait(500, msec);
+  CataMotor.stop();
+  wait(100, msec);
+  while (cataLine.reflectivity(pct) < 94){
+    CataMotor.spin(forward, 100, pct);
   }
-  else{
-    flywheel_speed = 61;
-  }
+  CataMotor.stop();
+  wait(250, msec);
+  CataMotor.setPosition(25, deg);
+  //amount += 0.05;
+}
+void cata_Init(){
+CataMotor.setBrake(hold);
+while(cataLine.reflectivity(pct) < 94){
+  CataMotor.spin(forward, 100, pct);
+}
+CataMotor.stop();
+wait(250, msec);
+CataMotor.setPosition(25, deg);
 }
 
-void change_speed(){
-  Controller1.ButtonRight.pressed(flywheel_toggle);
+void cata_Do(){
+  Controller1.ButtonRight.pressed(cata_shoot);
 }
+
+
