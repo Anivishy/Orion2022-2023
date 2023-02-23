@@ -21,4 +21,6 @@ void flywheel_Do();
 void change_speed();
 
 void cata_Init();
-void cata_Do();
+int cata_Do();
+
+void cata_shoot();

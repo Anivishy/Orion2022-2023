@@ -13,6 +13,8 @@ extern motor LeftMotorMiddle;
 extern motor LeftMotorBack;
 extern motor_group LeftDrive;
 
+extern motor_group Drive;
+
 extern pneumatics Indexer;
 extern pneumatics ExpansionPneumatic;
 

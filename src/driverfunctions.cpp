@@ -6,7 +6,7 @@ double a1Velocity;
 double a3Velocity;
 double a4Velocity;
 
-double driveIncrement = 10;
+double driveIncrement = 30;
 
 void driveMoveSlope_Init() {
   a1Velocity = a3Velocity = a4Velocity = 0;
@@ -36,12 +36,12 @@ void driveMoveSlope_Do() {
   calcIncrement(axis3, a3Velocity, driveIncrement);
   //calcIncrement(axis4, a4Velocity, driveIncrement);
 
-  LeftMotorFront.setVelocity((a3Velocity) /*- a4Velocity*/ + (a1Velocity * 0.3), pct);
-  LeftMotorMiddle.setVelocity((a3Velocity) /*- a4Velocity*/ + (a1Velocity * 0.3), pct);
-  LeftMotorBack.setVelocity((a3Velocity) /*+ a4Velocity*/ + (a1Velocity * 0.3), pct);
-  RightMotorFront.setVelocity((a3Velocity) /*+ a4Velocity */ - (a1Velocity * 0.3), pct);
-  RightMotorMiddle.setVelocity((a3Velocity) /*+ a4Velocity */ - (a1Velocity * 0.3), pct);
-  RightMotorBack.setVelocity((a3Velocity) /*- a4Velocity */ - (a1Velocity * 0.3), pct);
+  LeftMotorFront.setVelocity((a3Velocity) /*- a4Velocity*/ + (a1Velocity * 0.15), pct);
+  LeftMotorMiddle.setVelocity((a3Velocity) /*- a4Velocity*/ + (a1Velocity * 0.15), pct);
+  LeftMotorBack.setVelocity((a3Velocity) /*+ a4Velocity*/ + (a1Velocity * 0.15), pct);
+  RightMotorFront.setVelocity((a3Velocity) /*+ a4Velocity */ - (a1Velocity * 0.15), pct);
+  RightMotorMiddle.setVelocity((a3Velocity) /*+ a4Velocity */ - (a1Velocity * 0.15), pct);
+  RightMotorBack.setVelocity((a3Velocity) /*- a4Velocity */ - (a1Velocity * 0.15), pct);
 }
 
 void tank_drive_Init(){
@@ -177,7 +177,7 @@ void expand_Init(){
 }
   
 void expand_Do(){
-  Controller1.ButtonLeft.pressed(expand);
+  Controller1.ButtonA.pressed(expand);
 }
 
 void intake_Init(){
@@ -225,7 +225,7 @@ int f_count = 0;
 
 //CATAPULT CODE
 double amount = 1150;
-void cata_shoot(){
+int cata_shoot_int(){
   CataMotor.spin(forward, 100, pct);
   wait(500, msec);
   CataMotor.stop();
@@ -237,6 +237,11 @@ void cata_shoot(){
   wait(250, msec);
   CataMotor.setPosition(25, deg);
   //amount += 0.05;
+  return 0;
+
+}
+void cata_shoot(){
+  task multi = task(cata_shoot_int);
 }
 void cata_Init(){
 CataMotor.setBrake(hold);
@@ -248,8 +253,11 @@ wait(250, msec);
 CataMotor.setPosition(25, deg);
 }
 
-void cata_Do(){
+int cata_Do(){
+
   Controller1.ButtonRight.pressed(cata_shoot);
+
+  return 0;
 }
 
 

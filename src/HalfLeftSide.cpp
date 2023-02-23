@@ -5,11 +5,32 @@
 #include "driverfunctions.h"
 
 void halfLeftSide() {
+
+  Drive.setVelocity(20, pct);  
+  IntakeMotor.spin(reverse, 100, pct);
+  Drive.rotateFor(forward, 0.3, rev);
+  wait(50, msec);
+  //IntakeMotor.stop();
+  Drive.rotateFor(forward, -0.3, rev);
   
+  /*
+  RightDrive.rotateFor(reverse, 1.8, rev);
+  Drive.rotateFor(forward, 2.2, rev);
+  wait(200, msec);
+  Drive.rotateFor(forward, -1, rev);
+  RightDrive.rotateFor(forward, 0.5, rev);
+  wait(1000, msec);
+  ExpansionPneumatic.open();
+  */
+  
+  //Drive.rotateFor(forward, 0.6, rev);\
+  //RightDrive.rotateFor(reverse, 0.7, rev);
+  
+
 
   // runFlywheel(75, true);
   // IntakeMotor.spin(reverse, 100, pct);
-  // wait(500, msec);
+  // wait(500, msec
   // gyroMove(0.1, -50, 0.0);
   // IntakeMotor.stop();
   // turnPIDRight(45, true);
