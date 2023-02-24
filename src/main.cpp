@@ -123,6 +123,7 @@ void autonomous(void) {
   Brain.Screen.print(gyroS.yaw());
   */
   //skills
+  //1st 2 rollers
   IntakeMotor.spin(reverse, 100, pct);
   gyroMove(0.1, 30, 0);
   wait(100, msec);
@@ -135,22 +136,32 @@ void autonomous(void) {
   gyroTurnRight(90, 10);
   wait(50, msec);
   gyroMove(3.1, 30, 90);
+  //delay for pickup up 3rd disc
   wait(650, msec);
   gyroMove(0.6, 20, 90);
   wait(125, msec);
   gyroMove(0.95, -20, 90);
+  // end of 2nd roller
+  
+  //turn and move towards the goal + shoot
   gyroTurnLeft(10, 10);
   gyroMove(5.5, -30, 0);
   //gyroTurnRight()
   gyroTurnRight(7, 10);
   cata_shoot_auto();
   wait(50, msec);
+  // end of 1st shot
+
+  //movement towards 1st disc in row of 3
   gyroTurnLeft(0, 10);
   gyroMove(1, 30, 0);
   gyroMove(2.45, 30, -60);
   gyroTurnLeft(-125, 10);
   gyroMove(3.7, 10, -135);
   wait(300, msec);
+  //finish intaking 3rd disc
+
+  //turn and movement sequence towards goal for 2nd shot
   gyroTurnRight(0, 10);
   gyroMove(4.05, -30, 0);
   gyroTurnLeft(-65, 10);
@@ -158,28 +169,44 @@ void autonomous(void) {
   gyroTurnLeft(-93, 10);
   cata_shoot_auto();
   wait(1500, msec);
+  //end of 2nd shot
+
+  //movement toward matchload spot
   gyroTurnRight(-85, 10);
   gyroMove(1.2, 30, -90);
   gyroTurnRight(-5, 10);
   gyroMove(1, -20, 0);
+  //delay for person to load in discs
   wait(3000, msec);
-  //gyroMove(0.2, 20, 0);
+  //gyroMove(0.2, 20, 0); this is a movement away from the feeder before the next shot, should not be needed but just in case... very small if anything
+
+  //turn + move toward the goal for 3rd shot
   gyroTurnLeft(-85, 10);
   gyroMove(1.5, -30, -85);
   gyroTurnLeft(-93, 10);
   cata_shoot_auto();
   wait(1500, msec);
+  //end of 3rd shot
+
+  //movement towards 3rd roller
   gyroMove(5.5, 30, -90);
+  //turn toward the roller
   gyroTurnLeft(-150, 10);
+  //get roller
   gyroMove(0.7, 30, -165);
   wait(200, msec);
   gyroMove(1.5, -30, -165);
   IntakeMotor.stop();
   wait(100, msec);
+  // end of roller + backup from it
+
+  //turn to shoot expansion
   gyroTurnRight(35, 10);
   wait(100, msec);
+  //movement back after turn to center on the 4 tiles
   gyroMove(0.2, -30, 45);
   wait(1500, msec);
+  //expansion
   ExpansionPneumatic.open();
 /*
 //short skills
@@ -238,6 +265,7 @@ void autonomous(void) {
 */
 //double
 /*
+// 5 disk lowgoal auto
   IntakeMotor.spin(reverse, 100, pct);
   gyroMove(0.1, 30, 0);
   wait(40, msec);
@@ -253,6 +281,7 @@ void autonomous(void) {
   cata_shoot_auto();
 */
 /*
+// add this in for full double roller auton, needs to be tuned
   gyroTurnLeft(-80, 30);
   gyroMove(7.3, 40, -135);
   gyroTurnRight(-110, 10);
