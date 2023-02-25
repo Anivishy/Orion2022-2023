@@ -129,7 +129,7 @@ void autonomous(void) {
   wait(100, msec);
   gyroMove(0.25, -30, 0);
   wait(50, msec);
-  gyroTurnRight(35, 10);
+  gyroTurnRight(25, 10);
   gyroMove(2.2, -30, 35);
   wait(50, msec);
   IntakeMotor.spin(forward, 100, pct);
@@ -138,13 +138,14 @@ void autonomous(void) {
   gyroMove(3.1, 30, 90);
   //delay for pickup up 3rd disc
   wait(650, msec);
-  gyroMove(0.6, 20, 90);
+  gyroMove(0.4, 20, 90);
+  //roller wait time
   wait(125, msec);
   gyroMove(0.95, -20, 90);
   // end of 2nd roller
   
   //turn and move towards the goal + shoot
-  gyroTurnLeft(10, 10);
+  gyroTurnLeft(9, 10);
   gyroMove(5.5, -30, 0);
   //gyroTurnRight()
   gyroTurnRight(7, 10);
@@ -154,19 +155,19 @@ void autonomous(void) {
 
   //movement towards 1st disc in row of 3
   gyroTurnLeft(0, 10);
-  gyroMove(1, 30, 0);
-  gyroMove(2.45, 30, -60);
+  gyroMove(1.5, 15, 0);
+  gyroMove(2.45, 15, -60);
   gyroTurnLeft(-125, 10);
-  gyroMove(3.7, 10, -135);
+  gyroMove(3.7, 15, -135);
   wait(300, msec);
   //finish intaking 3rd disc
 
   //turn and movement sequence towards goal for 2nd shot
   gyroTurnRight(0, 10);
-  gyroMove(4.05, -30, 0);
+  gyroMove(3.75, -30, 0);////////
   gyroTurnLeft(-65, 10);
   gyroMove(2, -30, -75);
-  gyroTurnLeft(-93, 10);
+  gyroTurnLeft(-85, 10);
   cata_shoot_auto();
   wait(1500, msec);
   //end of 2nd shot
@@ -175,13 +176,14 @@ void autonomous(void) {
   gyroTurnRight(-85, 10);
   gyroMove(1.2, 30, -90);
   gyroTurnRight(-5, 10);
-  gyroMove(1, -20, 0);
+  gyroMove(0.95, -20, 0);//
   //delay for person to load in discs
   wait(3000, msec);
   //gyroMove(0.2, 20, 0); this is a movement away from the feeder before the next shot, should not be needed but just in case... very small if anything
 
   //turn + move toward the goal for 3rd shot
-  gyroTurnLeft(-85, 10);
+  gyroMove(0.1, 30, 0);//-----
+  gyroTurnLeft(-95, 10);
   gyroMove(1.5, -30, -85);
   gyroTurnLeft(-93, 10);
   cata_shoot_auto();
@@ -194,7 +196,7 @@ void autonomous(void) {
   gyroTurnLeft(-150, 10);
   //get roller
   gyroMove(0.7, 30, -165);
-  wait(200, msec);
+  wait(750, msec);
   gyroMove(1.5, -30, -165);
   IntakeMotor.stop();
   wait(100, msec);
